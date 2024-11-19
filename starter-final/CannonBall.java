@@ -10,9 +10,39 @@ public class CannonBall extends Actor
 {
 
     /**
-     * Act - do whatever the CannonBall wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.
+     * where all the actions take place.
      */
     public void act()
     {
+        transitionToGameOverScreen();
+        isGameOver();
+        Actor Ladybug = getOneIntersectingObject(Ladybug.class);
+        if (Ladybug != null) {
+            World world = getWorld();
+            world.removeObject(Ladybug);
+        }
+    }
+
+    /**
+     * transitiontoGameOverScreen
+     */
+    public void transitionToGameOverScreen()
+    {
+        World gameOverScreen =  new  GameOverScreen();
+        Greenfoot.setWorld(gameOverScreen);
+    }
+
+    /**
+     * game is lost if ladybug touches the cannon
+     */
+    public boolean isGameOver()
+    {
+        World world = getWorld();
+        if (world.getObjects(Ladybug.class).isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

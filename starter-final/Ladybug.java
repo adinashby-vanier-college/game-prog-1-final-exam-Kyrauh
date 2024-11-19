@@ -10,9 +10,49 @@ public class Ladybug extends Actor
 {
 
     /**
-     * Act - do whatever the Hero wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.
+     * 
      */
     public void act()
     {
+        transitionToWinningScreen();
+        moveAndTurn();
+        isGameWon();
+    }
+
+    /**
+     * moves the ladybug with the arrow keys
+     */
+    public void moveAndTurn()
+    {
+        move(4);
+        if (Greenfoot.isKeyDown("left")) {
+            turn(-3);
+        }
+        if (Greenfoot.isKeyDown("right")) {
+            turn(3);
+        }
+    }
+
+    /**
+     * game is won if ladybug reaches the FinishLocation
+     */
+    public boolean isGameWon()
+    {
+        World world = getWorld();
+        if (world.getObjects(FinishLocation.class).isEmpty()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * transitiontothewinningscreen
+     */
+    public void transitionToWinningScreen()
+    {
+        World WinningScreen =  new  WinningScreen();
+        Greenfoot.setWorld(WinningScreen);
     }
 }
